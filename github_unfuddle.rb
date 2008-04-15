@@ -3,7 +3,6 @@ require 'sinatra'
 require 'json'
 require 'yaml'
 require 'net/http'
-require 'net/https'
 
 CONFIG = YAML.load_file("config.yml")
 
@@ -43,6 +42,7 @@ def post_changeset_to_unfuddle(xml)
 
   # if using ssl, then set it up
   if CONFIG["unfuddle"]["use_ssl"]
+    require 'net/https'
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
   end
