@@ -3,6 +3,7 @@ require 'sinatra'
 require 'json'
 require 'yaml'
 require 'net/http'
+require 'net/https'
 
 CONFIG = YAML.load_file("config.yml")
 
@@ -26,8 +27,8 @@ def build_unfuddle_xml_from(push)
     <changeset>
       #{"<author-id type=\"integer\">#{unfuddle_author_id(commit)}</author-id>" if unfuddle_author_id(commit)}
       <message>#{commit["message"]}
-      <revision type="integer">#{timestamp.strftime("%y%m%d%H%M")}</revision>
 Details: #{commit["url"]}</message>
+      <revision type="integer">#{timestamp.strftime("%y%m%d%H%M")}</revision>
     </changeset>
     XML
     
